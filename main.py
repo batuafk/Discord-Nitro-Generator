@@ -128,6 +128,12 @@ if __name__ == '__main__':
         terminate_process("tor.exe")
         print("[INFO] tor.exe terminated")
 
+    try:
+        os.system("sudo service tor stop")
+        print("[INFO] service tor stoped")
+    except:
+        pass
+
     if os.path.exists("user_agents.txt"):
         with open("user_agents.txt", "r") as file:
             user_agents = [line.strip('\n') for line in file.readlines()]

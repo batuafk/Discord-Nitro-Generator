@@ -2,12 +2,13 @@ from torswitch import TorProtocol
 import threading
 import requests
 import psutil
-import ctypes
 import string
 import random
 import time
 import sys
 import os
+
+speed = 150  # 10 = slow, 100 = good, 1000 = fast
 
 api = "https://discordapp.com/api/v9/entitlements/gift-codes/"
 api2 = "?with_application=false&with_subscription_plan=true"
@@ -19,7 +20,12 @@ def clear():
 
 
 def set_title(title):
-    ctypes.windll.kernel32.SetConsoleTitleW(title)
+    if os.name == 'nt':
+        import ctypes
+        ctypes.windll.kernel32.SetConsoleTitleW(title)
+    else:
+        sys.stdout.write(f"\033]0;{title}\007")
+        sys.stdout.flush()
 
 
 def check_process_exists(process_name):
@@ -159,7 +165,7 @@ if __name__ == '__main__':
     while True:
         threads = []
 
-        for _ in range(1000):
+        for _ in range(speed):
             thread = threading.Thread(target=check_code)
             thread.daemon = True
             threads.append(thread)

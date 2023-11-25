@@ -122,7 +122,6 @@ def check_code():
 if __name__ == '__main__':
     set_title("Nitro Generator by Bt08s")
     clear()
-    print("[INFO] title changed")
 
     if check_process_exists("tor.exe") is True:
         terminate_process("tor.exe")

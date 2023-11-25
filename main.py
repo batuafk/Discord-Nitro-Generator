@@ -8,7 +8,7 @@ import time
 import sys
 import os
 
-speed = 150  # 10 = slow, 100 = good, 1000 = fast
+speed = int(input("Speed (10 = slow, 50 = good, 100 = fast ...): "))
 
 api = "https://discordapp.com/api/v9/entitlements/gift-codes/"
 api2 = "?with_application=false&with_subscription_plan=true"

@@ -8,7 +8,7 @@ import time
 import sys
 import os
 
-speed = int(input("Speed (50 = slow, 1000 = fast): "))
+speed = int(input("Speed (50 = slow, 100 = fast): "))
 
 api = "https://discordapp.com/api/v9/entitlements/gift-codes/"
 api2 = "?with_application=false&with_subscription_plan=true"
@@ -98,23 +98,30 @@ def check_code():
             headers = {'User-Agent': random.choice(user_agents)}
             response = requests.get(url, proxies=proxies, headers=headers, timeout=10)
             if response.status_code == 200:
-                with lock:
-                    nitro = gift + code
+                nitro = gift + code
+                try:
                     print(f"\033[32m{nitro} {tor_ip}\033[0m")
                     valid_count += 1
                     with open("valid_codes.txt", "a") as file:
                         file.write(nitro + "\n")
                     return True
+                except Exception as e:
+                    print(f"\033[32m{nitro} {tor_ip} Error: {e}\033[0m")
+            elif response.status_code == 429:
+                nitro = gift + code
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code}\033[0m")
+                error_count += 1
+                self_error += 1
             else:
                 nitro = gift + code
-                print(f"\033[31m{nitro} {tor_ip}\033[0m")
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code}\033[0m")
                 invalid_count += 1
                 if self_error > 0:
                     error_count = error_count - self_error
                 return False
         except:
             nitro = gift + code
-            print(f"\033[93m{nitro} {tor_ip}\033[0m")
+            print(f"\033[31m{nitro} {tor_ip} 000\033[0m")
             error_count += 1
             self_error += 1
 
@@ -127,11 +134,12 @@ if __name__ == '__main__':
         terminate_process("tor.exe")
         print("[INFO] tor.exe terminated")
 
-    try:
-        os.popen("sudo service tor stop")
-        print("[INFO] service tor stoped")
-    except:
-        pass
+    if os.name != "nt":
+        try:
+            os.popen("sudo service tor stop")
+            print("[INFO] service tor stopped")
+        except:
+            pass
 
     if os.path.exists("user_agents.txt"):
         with open("user_agents.txt", "r") as file:

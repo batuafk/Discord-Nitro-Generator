@@ -128,7 +128,7 @@ if __name__ == '__main__':
         print("[INFO] tor.exe terminated")
 
     try:
-        os.system("sudo service tor stop")
+        os.popen("sudo service tor stop")
         print("[INFO] service tor stoped")
     except:
         pass

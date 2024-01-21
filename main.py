@@ -8,7 +8,7 @@ import time
 import sys
 import os
 
-speed = int(input("Speed (50 = slow, 100 = fast): "))
+speed = int(input("Speed (10 = slow, 100 = fast): "))
 
 api = "https://discordapp.com/api/v9/entitlements/gift-codes/"
 api2 = "?with_application=false&with_subscription_plan=true"
@@ -70,7 +70,7 @@ def format_duration(seconds):
 def tor_rotation():
     global ip_change_count, tor_ip
     while True:
-        tor_ip = tor.AbsoluteNewTorIp()
+        tor.AbsoluteNewTorIp()
         ip_change_count += 1
 
 
@@ -79,8 +79,7 @@ def update_title():
     while True:
         time.sleep(1)
         duration = time.time() - start_time
-        set_title(
-            f"Nitro Generator by Bt08s | Time: {format_duration(duration)} | IP Change: {ip_change_count} | Error: {error_count} | Invalid: {invalid_count} | Valid: {valid_count}")
+        set_title(format_duration(duration))
 
 
 def check_code():
@@ -100,21 +99,29 @@ def check_code():
             if response.status_code == 200:
                 nitro = gift + code
                 try:
-                    print(f"\033[32m{nitro} {tor_ip}\033[0m")
+                    print(f"\033[32m{nitro} {tor_ip} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
                     valid_count += 1
-                    with open("valid_codes.txt", "a") as file:
-                        file.write(nitro + "\n")
+                    try:
+                        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+                        file_path = os.path.join(desktop_path, "valid_codes.txt")
+                        with open(file_path, "a") as file:
+                            file.write(nitro + "\n")
+                        os.startfile(file_path)
+                    except:
+                        with open("valid_codes.txt", "a") as file:
+                            file.write(nitro + "\n")
+                        os.system("start valid_codes.txt")
                     return True
                 except Exception as e:
                     print(f"\033[32m{nitro} {tor_ip} Error: {e}\033[0m")
             elif response.status_code == 429:
                 nitro = gift + code
-                print(f"\033[31m{nitro} {tor_ip} {response.status_code}\033[0m")
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
                 error_count += 1
                 self_error += 1
             else:
                 nitro = gift + code
-                print(f"\033[31m{nitro} {tor_ip} {response.status_code}\033[0m")
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m")
                 invalid_count += 1
                 if self_error > 0:
                     error_count = error_count - self_error
@@ -127,26 +134,26 @@ def check_code():
 
 
 if __name__ == '__main__':
-    set_title("Nitro Generator by Bt08s")
+    set_title("Nitro Gen by Bt08")
     clear()
 
     if check_process_exists("tor.exe") is True:
         terminate_process("tor.exe")
-        print("[INFO] tor.exe terminated")
+        print("tor.exe terminated")
 
     if os.name != "nt":
         try:
             os.popen("sudo service tor stop")
-            print("[INFO] service tor stopped")
+            print("Service tor stopped")
         except:
             pass
 
     if os.path.exists("user_agents.txt"):
         with open("user_agents.txt", "r") as file:
             user_agents = [line.strip('\n') for line in file.readlines()]
-        print(f"[INFO] loaded {len(user_agents)} user agents")
+        print(f"Loaded {len(user_agents)} user agents")
     else:
-        print("[ERROR] user_agents.txt not found")
+        print("Error: user_agents.txt not found")
         input()
         sys.exit()
 
@@ -175,6 +182,7 @@ if __name__ == '__main__':
 
     chars = string.ascii_letters + string.digits
 
+    print('')
     while True:
         threads = []
 

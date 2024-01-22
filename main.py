@@ -99,7 +99,7 @@ def check_code():
             if response.status_code == 200:
                 nitro = gift + code
                 try:
-                    print(f"\033[32m{nitro} {tor_ip} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
+                    print(f"\033[32m{nitro} {tor_ip} | IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
                     valid_count += 1
                     try:
                         desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
@@ -116,12 +116,12 @@ def check_code():
                     print(f"\033[32m{nitro} {tor_ip} Error: {e}\033[0m")
             elif response.status_code == 429:
                 nitro = gift + code
-                print(f"\033[31m{nitro} {tor_ip} {response.status_code} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code} | IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m\033[0m")
                 error_count += 1
                 self_error += 1
             else:
                 nitro = gift + code
-                print(f"\033[31m{nitro} {tor_ip} {response.status_code} IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m")
+                print(f"\033[31m{nitro} {tor_ip} {response.status_code} | IP Change: {ip_change_count} Error: {error_count} Invalid: {invalid_count} Valid: {valid_count}\033[0m")
                 invalid_count += 1
                 if self_error > 0:
                     error_count = error_count - self_error
@@ -134,7 +134,7 @@ def check_code():
 
 
 if __name__ == '__main__':
-    set_title("Nitro Gen by Bt08")
+    set_title("NitroGen")
     clear()
 
     if check_process_exists("tor.exe") is True:

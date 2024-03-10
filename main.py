@@ -104,7 +104,7 @@ def check_code(code, proxy, user_agent):
     }
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=20)
         message = response.json()["message"]
         if response.status_code == 200:
             valid_codes += 1

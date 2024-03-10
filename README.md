@@ -5,4 +5,4 @@
 > 
 > Uses 1k Tor socks5 proxies. Ports: 9000-9999
 >
-> Checks 100 codes in 30 seconds
+> Checks codes in TIMEx3

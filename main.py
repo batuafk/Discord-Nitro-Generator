@@ -146,7 +146,7 @@ def main():
                 thread = threading.Thread(target=check_code, args=(code, proxy, user_agent))
                 thread.daemon = True
                 thread.start()
-                time.sleep(0.3)
+                time.sleep(0.4)
 
             tor.restart()
     except KeyboardInterrupt:

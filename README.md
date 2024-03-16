@@ -1,7 +1,7 @@
 > [!NOTE]
 > Saves valid codes to valid_codes.txt and opens an msgbox
 >
-> Checks codes in TIMEx(2-5)
+> Checks codes in TIMEx(2-10)
 > 
 > Tested on Windows 10, 11
 > 

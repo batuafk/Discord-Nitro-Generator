@@ -3,8 +3,6 @@
 >
 > Checks codes in TIMEx(2-10)
 > 
-> Tested on Windows 10, 11
-> 
 > Uses 1k Tor socks5 proxies on ports 9000-9999 and 1k user-agents.
 > 
 

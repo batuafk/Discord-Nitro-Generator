@@ -1,5 +1,5 @@
 > [!NOTE]
-> Saves valid codes to valid_codes.txt and opens an msgbox
+> Saves valid codes to valid_codes.txt and opens an msgbox when find
 >
 > Checks codes in TIMEx(2-10)
 > 

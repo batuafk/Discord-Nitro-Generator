@@ -4,7 +4,7 @@ tor needs update
 >
 > Checks codes in TIMEx(2-10)
 > 
-> Uses 1k Tor socks5 proxies on ports 9000-9999 and 1k user-agents.
+> Uses 1k tor socks5 proxies on ports 9000-9999 and 1k user-agents.
 > 
 
 # [Download](https://github.com/Bt08s/Discord-Nitro-Generator/archive/refs/heads/main.zip)
